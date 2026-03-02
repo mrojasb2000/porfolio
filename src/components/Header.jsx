@@ -1,3 +1,4 @@
+import Link from './Link';
 import './Header.css';
 
 function Header({ logo }) {
@@ -7,14 +8,12 @@ function Header({ logo }) {
         <p>
           Edit <code>src/App.jsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          url="https://reactjs.org"
+          title="Learn React"
         >
           Learn React
-        </a>
+        </Link>
     </header>
   );
 }
