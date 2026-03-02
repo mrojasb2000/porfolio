@@ -1,10 +1,27 @@
 import { useState, useEffect } from 'react';
+import List from '../components/List';
 import Link from '../components/Link';
 import './Profile.css';
 
 function Profile({username}) {
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const items = [
+        {
+            field: 'html_url',
+            value: <Link url={profile.html_url} title={profile.html_url}/>
+        },
+        {
+            field: 'repos_url',
+            value: <Link url={profile.repos_url} title={profile.repos_url}/>
+        },
+        {   field: 'name', value: profile.name },
+        {   field: 'company', value: profile.company },
+        {   field: 'location', value: profile.location },
+        {   field: 'email', value: profile.email },
+        {   field: 'bio', value: profile.bio }
+    ];
 
     useEffect(() => {
         async function fetchProfile() {
@@ -23,18 +40,10 @@ function Profile({username}) {
         <div className="Profile-container">
             <h1>About me</h1>
             {loading ? <span>Loading...</span> : 
-            <>
+            <div>
                 <img className="Profile-avatar" src={profile.avatar_url} alt={`${profile.name}'s avatar`} />
-                <ul>
-                    <li><span>Html url</span>: <Link url={profile.html_url} title={profile.html_url}/></li>
-                    <li><span>Repositories</span>: <Link url={profile.repos_url} title={profile.repos_url}/></li>
-                    <li><span>Name</span>: {profile.name}</li>
-                    <li><span>Company</span>: {profile.company}</li>
-                    <li><span>Location</span>: {profile.location}</li>
-                    <li><span>Email</span>: {profile.email}</li>
-                    <li><span>Bio</span>: {profile.bio}</li>
-                </ul>
-            </>
+                <List items={items} />
+            </div>
             }
         </div>
     );
