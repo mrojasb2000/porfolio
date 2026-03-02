@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Link from '../components/Link';
+import './Profile.css';
 
 function Profile({username}) {
     const [profile, setProfile] = useState({});
@@ -18,18 +20,21 @@ function Profile({username}) {
     }, [username]);
 
     return (
-        <div>
+        <div className="Profile-container">
             <h1>About me</h1>
-            {loading ? <span>Loading...</span> : <ul>
-                <li>Avatar: <img src={profile.avatar_url} alt="Avatar" style={{width: '50px'}}/></li>
-                <li>Html url: <a href={profile.html_url} target="_blank" rel="noopener noreferrer">{profile.html_url}</a></li>
-                <li>Repositories: <a href={profile.repos_url} target="_blank" rel="noopener noreferrer">{profile.repos_url}</a></li>
-                <li><span>Name</span>: {profile.name}</li>
-                <li><span>Company</span>: {profile.company}</li>
-                <li><span>Location</span>: {profile.location}</li>
-                <li><span>Email</span>: {profile.email}</li>
-                <li><span>Bio</span>: {profile.bio}</li>
+            {loading ? <span>Loading...</span> : 
+            <>
+                <img className="Profile-avatar" src={profile.avatar_url} alt={`${profile.name}'s avatar`} />
+                <ul>
+                    <li><span>Html url</span>: <Link url={profile.html_url} title={profile.html_url}/></li>
+                    <li><span>Repositories</span>: <Link url={profile.repos_url} title={profile.repos_url}/></li>
+                    <li><span>Name</span>: {profile.name}</li>
+                    <li><span>Company</span>: {profile.company}</li>
+                    <li><span>Location</span>: {profile.location}</li>
+                    <li><span>Email</span>: {profile.email}</li>
+                    <li><span>Bio</span>: {profile.bio}</li>
                 </ul>
+            </>
             }
         </div>
     );
