@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path';
 
 export default defineConfig({
+  // If you still have a separate public folder, define its new relative path
+  //publicDir: path.resolve(__dirname, 'public'),
+  publicDir: 'public',
+
   plugins: [react()],
   server: {
     port: 3000,
